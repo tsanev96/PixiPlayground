@@ -1,0 +1,19 @@
+{
+  "name": "amusnet-playground",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 4000",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~5.7.2",
+    "vite": "^6.3.1"
+  },
+  "dependencies": {
+    "gsap": "^3.12.7",
+    "pixi.js": "^8.9.2"
+  }
+}
