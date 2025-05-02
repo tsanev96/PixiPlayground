@@ -9,7 +9,7 @@ interface AddBackground {
 export default function addBackground({ app, spriteName }: AddBackground) {
   const background = Sprite.from(spriteName);
 
-  background.anchor.set(0.5);
+  background.anchor.set(0.5); // origin point of sprite - MIDDLE
 
   const { width, height } = app.screen;
 
