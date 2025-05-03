@@ -11,5 +11,6 @@ export default function addDisplacementEffect(app: PixiApp) {
     scale: 50,
   });
 
+  // applies the filter to the whole app
   app.stage.filters = [filter];
 }

@@ -1,6 +1,9 @@
-import { Application, Assets, Renderer, Sprite } from "pixi.js";
+import { Assets, Sprite } from "pixi.js";
+import setInitialApp from "../../utils/setInitialApp";
 
-export default async function rotatingBunny(app: Application<Renderer>) {
+export default async function rotatingBunny() {
+  const app = await setInitialApp();
+
   const texture = await Assets.load("https://pixijs.com/assets/bunny.png");
   const bunny = new Sprite(texture);
 

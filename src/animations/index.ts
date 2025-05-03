@@ -1,10 +1,11 @@
-import { Application, Renderer } from "pixi.js";
 import rotatingBunny from "./rotatingBunny";
 import fishPond from "./fishPond";
+import chooChooTrain from "./train";
 
-export default function animations(app: Application<Renderer>) {
+export default function animations() {
   return {
-    rotatingBunny: () => rotatingBunny(app),
-    fishPond: () => fishPond(app),
+    rotatingBunny,
+    fishPond,
+    chooChooTrain,
   };
 }

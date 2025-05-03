@@ -5,6 +5,8 @@ import assets from "./assets";
 import FishSprite from "../../types/FishSprite";
 import { addOverlay, animateOverlay } from "../../utils/addAnimatedOverlay";
 import addDisplacementEffect from "../../utils/addDisplacementEffect";
+import setInitialApp from "../../utils/setInitialApp";
+import getScreenSize from "../../utils/getScreenSize";
 
 function createFishes(app: PixiApp) {
   const fishContainer = new Container();
@@ -39,8 +41,7 @@ function createFishes(app: PixiApp) {
 }
 
 function animateFishes(app: PixiApp, fishes: FishSprite[]) {
-  const screenWidth = app.screen.width;
-  const screenHeight = app.screen.height;
+  const { screenHeight, screenWidth } = getScreenSize(app);
 
   /** Extra space outside of boundaries */
   const stagePadding = 100;
@@ -68,7 +69,8 @@ function animateFishes(app: PixiApp, fishes: FishSprite[]) {
   });
 }
 
-export default async function fishPond(app: PixiApp) {
+export default async function fishPond() {
+  const app = await setInitialApp();
   await Assets.load(assets); // loads assets and keep them in cache
 
   addBackground({ app, spriteName: "background" });
