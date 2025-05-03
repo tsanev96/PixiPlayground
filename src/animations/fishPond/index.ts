@@ -32,6 +32,8 @@ function createFishes(app: PixiApp) {
 
     app.stage.addChild(fish);
   }
+
+  return fishes;
 }
 
 export default async function fishPond(app: PixiApp) {
@@ -39,5 +41,26 @@ export default async function fishPond(app: PixiApp) {
 
   addBackground({ app, spriteName: "background" });
 
-  createFishes(app);
+  const fishes = createFishes(app);
+
+  for (let i = 0; i <= 360; i++) {
+    console.log(Math.sin(i));
+  }
+  app.ticker.add((time) => {
+    const { deltaTime } = time;
+
+    /** Extra space outside of boundaries */
+    const stagePadding = 100;
+    const boundWidth = app.screen.width + stagePadding * 2;
+    const boundHeight = app.screen.height + stagePadding * 2;
+
+    fishes.forEach((fish) => {
+      // Math.sin() 0-90 -> 0 - 1
+      // Math.cos() 0-90 -> 1 - 0
+      fish.direction += fish.turnSpeed * 0.01;
+      fish.x += Math.sin(fish.direction) * fish.speed;
+      fish.y += Math.cos(fish.direction) * fish.speed;
+      fish.rotation = -fish.direction - Math.PI / 2; // rotating the sprite by -90 degree
+    });
+  });
 }
