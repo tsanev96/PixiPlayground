@@ -18,7 +18,6 @@ export function addOverlay(app: PixiApp, textureName?: string) {
 export function animateOverlay(deltaTime: number) {
   // tilePosition - Moves the texture inside the TilingSprite, giving the effect of it scrolling/repeating
   // using just x.y - Moves the entire TilingSprite
-
   if (!overlay) {
     return;
   }

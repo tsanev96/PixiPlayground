@@ -1,9 +1,10 @@
-import { Assets, Container, Sprite, Texture, TilingSprite } from "pixi.js";
+import { Assets, Container, Sprite } from "pixi.js";
 import PixiApp from "../../types/pixiApp";
 import addBackground from "../../utils/addBackground";
 import assets from "./assets";
 import FishSprite from "../../types/FishSprite";
 import { addOverlay, animateOverlay } from "../../utils/addAnimatedOverlay";
+import addDisplacementEffect from "../../utils/addDisplacementEffect";
 
 function createFishes(app: PixiApp) {
   const fishContainer = new Container();
@@ -72,6 +73,7 @@ export default async function fishPond(app: PixiApp) {
 
   addBackground({ app, spriteName: "background" });
   addOverlay(app);
+  addDisplacementEffect(app);
 
   const fishes = createFishes(app);
 
