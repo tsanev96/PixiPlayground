@@ -36,6 +36,38 @@ function createFishes(app: PixiApp) {
   return fishes;
 }
 
+function animateFishes(app: PixiApp, fishes: FishSprite[]) {
+  app.ticker.add((_time) => {
+    const screenWidth = app.screen.width;
+    const screenHeight = app.screen.height;
+
+    /** Extra space outside of boundaries */
+    const stagePadding = 100;
+    const boundWidth = screenWidth + stagePadding * 2; // 1000(1200)
+    const boundHeight = screenHeight + stagePadding * 2; // 700(900)
+
+    fishes.forEach((fish) => {
+      const { direction, x, y, turnSpeed, speed } = fish;
+      // Updates direction and movements
+      fish.direction += turnSpeed * 0.01;
+      fish.x += Math.sin(direction) * speed; // Math.sin() 0-90 -> 0 - 1
+      fish.y += Math.cos(direction) * speed; // Math.cos() 0-90 -> 1 - 0
+      fish.rotation = -direction - Math.PI / 2; // rotating the sprite by -90 degree
+
+      const isOffLeft = x < -stagePadding;
+      const isOffRight = x > screenWidth + stagePadding;
+      const isOffBottom = y > screenHeight + stagePadding;
+      const isOffTop = y < -stagePadding;
+
+      // Boundary wrap logic
+      if (isOffLeft) fish.x += boundWidth;
+      if (isOffRight) fish.x -= boundWidth;
+      if (isOffBottom) fish.y -= boundHeight;
+      if (isOffTop) fish.y += boundHeight;
+    });
+  });
+}
+
 export default async function fishPond(app: PixiApp) {
   await Assets.load(assets); // loads assets and keep them in cache
 
@@ -43,24 +75,5 @@ export default async function fishPond(app: PixiApp) {
 
   const fishes = createFishes(app);
 
-  for (let i = 0; i <= 360; i++) {
-    console.log(Math.sin(i));
-  }
-  app.ticker.add((time) => {
-    const { deltaTime } = time;
-
-    /** Extra space outside of boundaries */
-    const stagePadding = 100;
-    const boundWidth = app.screen.width + stagePadding * 2;
-    const boundHeight = app.screen.height + stagePadding * 2;
-
-    fishes.forEach((fish) => {
-      // Math.sin() 0-90 -> 0 - 1
-      // Math.cos() 0-90 -> 1 - 0
-      fish.direction += fish.turnSpeed * 0.01;
-      fish.x += Math.sin(fish.direction) * fish.speed;
-      fish.y += Math.cos(fish.direction) * fish.speed;
-      fish.rotation = -fish.direction - Math.PI / 2; // rotating the sprite by -90 degree
-    });
-  });
+  animateFishes(app, fishes);
 }
