@@ -5,6 +5,7 @@ import getScreenSize from "../../utils/getScreenSize";
 import setInitialApp from "../../utils/setInitialApp";
 import svgFileToString from "../../utils/svgFileToString";
 import getMountainGraphics from "./mountain";
+import { addTrees } from "./trees";
 
 function addStars(app: PixiApp) {
   const graphics = new Graphics();
@@ -82,4 +83,5 @@ export default async function chooChooTrain() {
   addStars(app);
   await createMoon(app);
   addMountains(app);
+  addTrees(app);
 }
