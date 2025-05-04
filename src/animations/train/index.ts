@@ -1,9 +1,10 @@
-import { Assets, Graphics, Sprite } from "pixi.js";
-import setInitialApp from "../../utils/setInitialApp";
-import getScreenSize from "../../utils/getScreenSize";
+import { Graphics } from "pixi.js";
+import moonSvg from "../../assets/moon.svg";
 import PixiApp from "../../types/pixiApp";
-import moonSvg from "../../../public/moon.svg";
+import getScreenSize from "../../utils/getScreenSize";
+import setInitialApp from "../../utils/setInitialApp";
 import svgFileToString from "../../utils/svgFileToString";
+import getMountainGraphics from "./mountain";
 
 function addStars(app: PixiApp) {
   const graphics = new Graphics();
@@ -52,106 +53,27 @@ async function createMoon(app: PixiApp) {
   app.stage.addChild(graphics);
 }
 
-interface Cordinates {
-  x: number;
-  y: number;
-}
+function addMountains(app: PixiApp) {
+  const group1 = getMountainGraphics(app);
+  const group2 = getMountainGraphics(app);
 
-interface Mountain {
-  startX: number;
-  startY: number;
-  endX: number;
-  endY: number;
-  cp1: Cordinates;
-  cp2: Cordinates;
-  color: number;
-}
+  group2.x = app.screen.width;
+  app.stage.addChild(group1, group2);
 
-function createMountain(app: PixiApp, mountain: Mountain) {
-  const { startX, startY, cp1, cp2, endX, endY, color } = mountain;
-  const graphics = new Graphics();
+  const { screenWidth } = getScreenSize(app);
+  app.ticker.add(({ deltaTime }) => {
+    const dx = deltaTime * 1.2;
+    group1.x -= dx;
+    group2.x -= dx;
 
-  graphics
-    .moveTo(startX, startY) // Start position
-    .bezierCurveTo(
-      cp1.x, // Curve left X
-      cp1.y, // Curve left Y
-      cp2.x, // Curve right X
-      cp2.y, // Curve right Y
-      endX, // End position X
-      endY, // End position Y
-    )
-    .fill({ color });
+    if (group1.x <= -screenWidth) {
+      group1.x += screenWidth * 2;
+    }
 
-  app.stage.addChild(graphics);
-}
-
-function createMountainGroup(app: PixiApp) {
-  const { screenHeight, screenWidth } = getScreenSize(app);
-
-  const quarterScreenWidth = screenWidth / 4;
-  const halfScreenWidth = screenWidth / 2;
-
-  const startMidX = quarterScreenWidth / 2;
-  const endMidX = halfScreenWidth / 1.5;
-  const midXcp = (startMidX + endMidX) / 2;
-  const middle: Mountain = {
-    startX: startMidX,
-    startY: screenHeight,
-    endX: endMidX,
-    endY: screenHeight,
-    cp1: {
-      x: midXcp,
-      y: screenHeight * 0.2,
-    },
-    cp2: {
-      x: midXcp,
-      y: screenHeight * 0.2,
-    },
-    color: 0x7e818f,
-  };
-
-  const startLeftX = 0;
-  const endLeftX = halfScreenWidth / 2;
-  const leftXcp = (startLeftX + endLeftX) / 2;
-  const left: Mountain = {
-    startX: startLeftX,
-    startY: screenHeight,
-    endX: endLeftX,
-    endY: screenHeight,
-    cp1: {
-      x: leftXcp,
-      y: screenHeight * 0.4,
-    },
-    cp2: {
-      x: leftXcp,
-      y: screenHeight * 0.4,
-    },
-    color: 0xc1c0c2,
-  };
-
-  const startRightX = quarterScreenWidth;
-  const endRightX = startRightX * 1.8;
-  const rightXcp = (startRightX + endRightX) / 2;
-  const right: Mountain = {
-    startX: startRightX,
-    startY: screenHeight,
-    endX: endRightX,
-    endY: screenHeight,
-    cp1: {
-      x: rightXcp,
-      y: screenHeight * 0.4,
-    },
-    cp2: {
-      x: rightXcp,
-      y: screenHeight * 0.4,
-    },
-    color: 0x8c919f,
-  };
-
-  createMountain(app, middle);
-  createMountain(app, left);
-  createMountain(app, right);
+    if (group2.x <= -screenWidth) {
+      group2.x += screenWidth * 2;
+    }
+  });
 }
 
 export default async function chooChooTrain() {
@@ -159,10 +81,5 @@ export default async function chooChooTrain() {
 
   addStars(app);
   await createMoon(app);
-
-  const group1 = createMountainGroup(app);
-  const group2 = createMountainGroup(app);
-
-  //   group2.x = app.screen.width;
-  //   app.stage.addChild(group1, group2);
+  addMountains(app);
 }
