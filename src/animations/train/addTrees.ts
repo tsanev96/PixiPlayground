@@ -1,25 +1,25 @@
 import { Graphics } from "pixi.js";
 import PixiApp from "../../types/pixiApp";
 import getScreenSize from "../../utils/getScreenSize";
-import randomNumberRange from "../../utils/randomNumberRange";
 
 export function addTrees(app: PixiApp) {
   const { screenHeight } = getScreenSize(app);
   const trees: Graphics[] = [];
 
-  const treeY = screenHeight - 40;
+  const treeY = screenHeight - 28;
   const treeSpacing = 15;
   const treeWidth = 200;
 
   const treesCount = app.screen.width / (treeWidth + treeSpacing) + 1;
-  for (let i = 1; i < treesCount; i++) {
+
+  for (let index = 0; index < treesCount; index++) {
     const width = 200;
     const height = screenHeight / 3;
 
     const tree = createTree(width, height);
     trees.push(tree);
 
-    tree.x = i * (treeSpacing + treeWidth);
+    tree.x = index * (treeSpacing + treeWidth);
     tree.y = treeY;
 
     app.stage.addChild(tree);
@@ -28,10 +28,8 @@ export function addTrees(app: PixiApp) {
   app.ticker.add(({ deltaTime }) => {
     for (const tree of trees) {
       tree.x -= deltaTime * 3;
-
-      if (tree.x <= -(treeWidth / 2 + treeSpacing)) {
-        console.log(tree.x, -(treeWidth / 2 + treeSpacing));
-        // tree.x += treesCount * (treeWidth + treeSpacing) + treeSpacing * 3;
+      if (tree.x <= -(treeWidth / 2)) {
+        tree.x += treesCount * (treeWidth + treeSpacing) + treeSpacing;
       }
     }
   });
