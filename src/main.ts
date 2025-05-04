@@ -1,4 +1,3 @@
-import { Application } from "pixi.js";
 import animations from "./animations";
 import "./styles.css";
 
