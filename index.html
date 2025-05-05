@@ -7,7 +7,67 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="box">Box GSAP</div>
+
+      <main>
+        <form>
+          <label>
+            <input type="radio" id="to" name="method" value="to" checked>
+            to</label>
+          <label>
+            <input type="radio" id="from" name="method" value="from">
+            from</label>
+          <label>
+            <input type="radio" id="fromTo" name="method" value="fromTo">
+            fromTo</label>
+          <label>
+            <input type="radio" id="set" name="method" value="set">
+            set</label>
+        </form>
+      
+        <svg viewBox="0 0 100 20">
+          <circle class="outline from-outline" stroke="grey" fill="none" stroke-dasharray='1.2' stroke-width="0.3" cx="10" cy="10" r="9.7" />
+          <circle class="outline center-outline" stroke="grey" fill="none" stroke-dasharray='1.2' stroke-width="0.3" cx="50" cy="10" r="9.7" />
+          <circle class="outline to-outline" stroke="grey" fill="none" stroke-dasharray='1.2' stroke-width="0.3" cx="90" cy="10" r="9.7" />
+          <circle class="circle" stroke-width="0.3" fill="#0ae448" cx="50" cy="10" r="10" />
+        </svg>
+      <div class="code-container">
+        
+          <code class="code-to language-js">
+            gsap.to(".circle", {
+            x: 40,
+            fill: 'blue',
+            });
+          </code>
+      
+          <code class="code-from language-js">
+            gsap.from(".circle", {
+            x: -40,
+            fill: 'blue',
+            });
+          </code>
+      
+          <code class="code-fromTo language-js">
+            gsap.fromTo( ".circle",{
+            x: -40,
+            fill: 'blue',
+            },
+            {
+            x: 40,
+            fill: 'green'
+            });
+          </code>
+        
+        <code class="code-set language-js">
+            gsap.set(".circle", {
+            x: 40,
+            fill: 'blue',
+            });
+          </code>
+        </div>
+      </main>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
