@@ -2,10 +2,11 @@ import animations from "./animations";
 import "./styles.css";
 import gsap from "gsap";
 import "./gsap-playground/tweens";
+import "./gsap-playground";
 
 const { rotatingBunny, fishPond, chooChooTrain } = animations();
 
-rotatingBunny();
+// rotatingBunny();
 // fishPond();
 // chooChooTrain();
 

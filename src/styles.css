@@ -7,7 +7,6 @@ body {
     min-height: 80vh;
     margin: 0;
     overflow: hidden;
-    background-color: lightblue;
 }
 #app {
     width: 100%;
@@ -18,6 +17,7 @@ body {
   color: #fff;
   font-size: 1.5rem;
 }
+
 .box {
     margin: 30px;
     padding: 30px;
@@ -37,6 +37,7 @@ main {
     padding: 0;
     background-color: #0e100f;
   }
+
   
   .token.function {
     color: #93c763;
@@ -88,6 +89,31 @@ main {
     position: absolute;
   }
 
-  .gsap-container {
+  /* .gsap-container {
     display: none;
+  } */
+
+  .main-gsap {
+    display: none;
+  }
+
+  .section-boxes {
+    display: flex;
+    justify-content: center;
+  }
+
+  .green {
+    background:#93c763
+  }
+
+  .purple {
+    background: purple;
+  }
+
+  .orange {
+    background: orange;
+  }
+
+  .box {
+    opacity: 0;
   }

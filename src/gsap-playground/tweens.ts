@@ -14,7 +14,7 @@ form.addEventListener("change", function () {
   const type = input.value;
 
   gsap.set(".circle", { clearProps: "all" }); // clear all properties that were added during the animation, reset
-  gsap.set(".outline, code", { autoAlpha: 0 });
+  // gsap.set(".outline, code", { autoAlpha: 0 });
 
   //   timeline.clear();
   switch (type) {
@@ -46,19 +46,3 @@ form.addEventListener("change", function () {
         );
   }
 });
-
-// timeline.to(".box", { x: "100%", duration: 3, yoyo: true, repeat: -1 });
-//   .to(".box", { x: 0, duration: 2, ease: "bounce.in" });
-
-timeline
-  .to(".box", {
-    x: "90vw",
-    //   ease: "back.out",
-    duration: 5,
-    rotation: 45,
-    yoyo: true,
-    // repeat: 2,
-  })
-  .to(".box", { x: "0", duration: 3, delay: 1, rotation: 0 });
-
-// timeline.set(".box", { clearProps: "all" });
