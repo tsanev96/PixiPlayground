@@ -4,13 +4,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    min-height: 100vh;
+    min-height: 80vh;
     margin: 0;
     overflow: hidden;
     background-color: lightblue;
 }
 #app {
     width: 100%;
+    padding-top: 20px;
 }
 
 .language-js {
@@ -22,7 +23,8 @@ body {
     padding: 30px;
     background: coral;
     border-radius: 5px;
-    width: 200px;
+    width: 30px;
+    height: 30px;
 }
 
 main {
@@ -84,4 +86,8 @@ main {
   
   code {
     position: absolute;
+  }
+
+  .gsap-container {
+    display: none;
   }

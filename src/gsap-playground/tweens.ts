@@ -25,7 +25,6 @@ form.addEventListener("change", function () {
         .to(".circle", { x: 40, duration: 2, ease: "bounce", fill: "orange" }); // moves the circle with 40px
       break;
     case "set":
-      // Moves the circle with no animation
       timeline
         .to(".code-set", { autoAlpha: 1 })
         .set(".circle", { x: 40, fill: "blue" });
@@ -47,3 +46,19 @@ form.addEventListener("change", function () {
         );
   }
 });
+
+// timeline.to(".box", { x: "100%", duration: 3, yoyo: true, repeat: -1 });
+//   .to(".box", { x: 0, duration: 2, ease: "bounce.in" });
+
+timeline
+  .to(".box", {
+    x: "90vw",
+    //   ease: "back.out",
+    duration: 5,
+    rotation: 45,
+    yoyo: true,
+    // repeat: 2,
+  })
+  .to(".box", { x: "0", duration: 3, delay: 1, rotation: 0 });
+
+// timeline.set(".box", { clearProps: "all" });

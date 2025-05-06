@@ -5,14 +5,11 @@ import "./gsap-playground/tweens";
 
 const { rotatingBunny, fishPond, chooChooTrain } = animations();
 
-// rotatingBunny();
+rotatingBunny();
 // fishPond();
 // chooChooTrain();
 
 /** GSAP  */
-
-// four types of tweens
-gsap.from(".box", { x: 300, animation: "ease" });
 
 /*
 gsap.to()
