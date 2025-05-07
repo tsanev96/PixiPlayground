@@ -13,7 +13,7 @@ export function addTrees(app: PixiApp) {
   const treesCount = app.screen.width / (treeWidth + treeSpacing) + 1;
 
   for (let index = 0; index < treesCount; index++) {
-    const width = 200;
+    const width = 120;
     const height = screenHeight / 3;
 
     const tree = createTree(width, height);

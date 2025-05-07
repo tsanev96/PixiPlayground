@@ -7,6 +7,14 @@ import { addOverlay, animateOverlay } from "../../utils/addAnimatedOverlay";
 import addDisplacementEffect from "../../utils/addDisplacementEffect";
 import setInitialApp from "../../utils/setInitialApp";
 import getScreenSize from "../../utils/getScreenSize";
+import gsap from "gsap";
+import { PixiPlugin } from "gsap/PixiPlugin";
+// import * as PIXI from "pixi.js";
+
+// gsap.registerPlugin(PixiPlugin);
+// PixiPlugin.registerPIXI(PIXI);
+
+gsap.registerPlugin(PixiPlugin);
 
 function createFishes(app: PixiApp) {
   const fishContainer = new Container();
@@ -48,6 +56,8 @@ function animateFishes(app: PixiApp, fishes: FishSprite[]) {
   const boundWidth = screenWidth + stagePadding * 2; // 1000(1200)
   const boundHeight = screenHeight + stagePadding * 2; // 700(900)
 
+  const timeline = gsap.timeline();
+
   fishes.forEach((fish) => {
     const { direction, x, y, turnSpeed, speed } = fish;
     // Updates direction and movements
@@ -78,6 +88,11 @@ export default async function fishPond() {
   addDisplacementEffect(app);
 
   const fishes = createFishes(app);
+
+  // gsap.ticker.add((time) => {
+  //   animateFishes(app, fishes);
+  //   animateOverlay(time);
+  // });
 
   app.ticker.add((time) => {
     const { deltaTime } = time;

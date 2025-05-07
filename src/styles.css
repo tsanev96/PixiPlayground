@@ -2,15 +2,14 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: flex-start;
     min-height: 80vh;
     margin: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 #app {
     width: 100%;
-    padding-top: 20px;
 }
 
 .language-js {
@@ -89,9 +88,9 @@ main {
     position: absolute;
   }
 
-  /* .gsap-container {
+  .gsap-container {
     display: none;
-  } */
+  }
 
   .main-gsap {
     display: none;

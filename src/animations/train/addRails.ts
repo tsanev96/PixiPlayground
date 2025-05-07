@@ -1,6 +1,7 @@
 import { Graphics } from "pixi.js";
 import PixiApp from "../../types/pixiApp";
 import getScreenSize from "../../utils/getScreenSize";
+import gsap from "gsap";
 
 export default function addRails(app: PixiApp) {
   const { screenWidth, screenHeight } = getScreenSize(app);
@@ -31,9 +32,10 @@ export default function addRails(app: PixiApp) {
     planks.push(plank);
   }
 
-  app.ticker.add(({ deltaTime }) => {
-    const dx = deltaTime * 6;
+  const pixelsPerFrame = 6;
 
+  gsap.ticker.add((time) => {
+    const dx = gsap.ticker.deltaRatio() * pixelsPerFrame;
     for (const plank of planks) {
       plank.x -= dx;
 

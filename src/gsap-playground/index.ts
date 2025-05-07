@@ -23,9 +23,11 @@ const boxes = document.querySelectorAll(".box");
 
 gsap.to(".box", {
   duration: 1,
-  rotation: 360,
+  rotation: 90,
   opacity: 1,
+  ease: "bounce",
 });
+
 boxes.forEach((box) => {
   box.addEventListener("click", () => {
     console.log("clicked");
@@ -35,6 +37,7 @@ boxes.forEach((box) => {
       stagger: 0.2,
       ease: "back.in",
       opacity: 0,
+      // reversed: true,
     });
   });
 });

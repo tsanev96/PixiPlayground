@@ -14,7 +14,7 @@ form.addEventListener("change", function () {
   const type = input.value;
 
   gsap.set(".circle", { clearProps: "all" }); // clear all properties that were added during the animation, reset
-  // gsap.set(".outline, code", { autoAlpha: 0 });
+  gsap.set(".outline, code", { autoAlpha: 0 });
 
   //   timeline.clear();
   switch (type) {
@@ -22,7 +22,12 @@ form.addEventListener("change", function () {
       timeline
         .set(".code-to", { autoAlpha: 1 }) // showing the code tag
         .to(".to-outline", { autoAlpha: 1 }) // showing the outline cirle
-        .to(".circle", { x: 40, duration: 2, ease: "bounce", fill: "orange" }); // moves the circle with 40px
+        .to(".circle", {
+          x: 40,
+          duration: 2,
+          ease: "bounce.inOut",
+          fill: "orange",
+        }); // moves the circle with 40px
       break;
     case "set":
       timeline
