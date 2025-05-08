@@ -12,6 +12,13 @@ body {
     width: 100%;
 }
 
+.box-gsap {
+  margin: 40px;
+  width: 70px;
+  height: 70px;
+  background-color: rgb(26, 71, 86);
+}
+
 .language-js {
   color: #fff;
   font-size: 1.5rem;
@@ -89,7 +96,7 @@ main {
   }
 
   .gsap-container {
-    display: none;
+    /* display: none; */
   }
 
   .main-gsap {
@@ -99,6 +106,7 @@ main {
   .section-boxes {
     display: flex;
     justify-content: center;
+    display: none;
   }
 
   .green {

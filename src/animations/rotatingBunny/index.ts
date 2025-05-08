@@ -1,8 +1,7 @@
 import { Assets, Sprite } from "pixi.js";
 import setInitialApp from "../../utils/setInitialApp";
 import { gsap } from "gsap";
-
-type Timeline = gsap.core.Timeline;
+import Timeline from "../../types/pixi/timeline";
 
 interface TimelineBunny {
   bunny: Sprite;
@@ -18,12 +17,11 @@ function rotate({ bunny, timeline }: TimelineBunny) {
   });
 }
 
-function pauseRotating({ bunny, timeline }: TimelineBunny) {
-  // gsap.killTweensOf(sprite);
+function pauseRotating({ timeline }: TimelineBunny) {
   timeline.pause();
 }
 
-function playRotating({ bunny, timeline }: TimelineBunny) {
+function playRotating({ timeline }: TimelineBunny) {
   timeline.play();
 }
 
@@ -52,6 +50,7 @@ export default async function rotatingBunny() {
     bunny,
     timeline,
   };
+
   rotate(timelineBunny);
 
   bunny.interactive = true; // to trigger events

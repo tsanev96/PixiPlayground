@@ -5,6 +5,7 @@ import "./gsap-playground";
 import { PixiPlugin } from "gsap/PixiPlugin";
 import * as PIXI from "pixi.js";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 PixiPlugin.registerPIXI(PIXI);
 
@@ -14,12 +15,21 @@ const { rotatingBunny, fishPond, chooChooTrain, scrollTriggerBoxes } =
 // rotatingBunny();
 // fishPond();
 // chooChooTrain();
-scrollTriggerBoxes();
+// scrollTriggerBoxes();
 /** GSAP  */
 
-/*
-gsap.to()
-gsap.from()
-gsap.fromTo()
-gsap.set() - Immediately sets properties (no animation). It's essentially a zero-duration .to() tween.
-*/
+const target = document.querySelector(".box-gsap")!;
+
+target.addEventListener("mouseover", () => {
+  if (gsap.effects.fade) {
+    gsap.effects.fade(target);
+  }
+});
+
+target.addEventListener("mouseleave", () => {
+  if (gsap.effects.unfade) {
+    gsap.effects.unfade(target, {
+      duration: 1.5,
+    });
+  }
+});

@@ -89,13 +89,17 @@ export default async function fishPond() {
 
   const fishes = createFishes(app);
 
-  // gsap.ticker.add((time) => {
-  //   animateFishes(app, fishes);
-  //   animateOverlay(time);
-  // });
-
+  /*
   app.ticker.add((time) => {
     const { deltaTime } = time;
+
+    animateFishes(app, fishes);
+    animateOverlay(deltaTime);
+  });
+  */
+
+  gsap.ticker.add((_time) => {
+    const deltaTime = gsap.ticker.deltaRatio();
 
     animateFishes(app, fishes);
     animateOverlay(deltaTime);

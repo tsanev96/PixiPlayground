@@ -1,11 +1,12 @@
 import gsap from "gsap";
+import "./effects";
 
-const timeline = gsap.timeline();
+const tl = gsap.timeline();
 /*
-// timeline.to(".box", { x: "100%", duration: 3, yoyo: true, repeat: -1 });
+// tl.to(".box", { x: "100%", duration: 3, yoyo: true, repeat: -1 });
 //   .to(".box", { x: 0, duration: 2, ease: "bounce.in" });
 
-timeline
+tl
   .to(".box", {
     x: "90vw",
     //   ease: "back.out",
@@ -16,10 +17,12 @@ timeline
   })
   .to(".box", { x: "0", duration: 3, delay: 1, rotation: 0 });
 
-// timeline.set(".box", { clearProps: "all" });
+// tl.set(".box", { clearProps: "all" });
 */
 
 const boxes = document.querySelectorAll(".box");
+
+const testBox = document.querySelector(".box-gsap")!;
 
 gsap.to(".box", {
   duration: 1,
@@ -41,3 +44,10 @@ boxes.forEach((box) => {
     });
   });
 });
+
+/*
+gsap.to()
+gsap.from()
+gsap.fromTo()
+gsap.set() - Immediately sets properties (no animation). It's essentially a zero-duration .to() tween.
+*/

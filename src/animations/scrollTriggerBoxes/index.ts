@@ -2,10 +2,7 @@ import { Container, Graphics } from "pixi.js";
 import setInitialApp from "../../utils/setInitialApp";
 import getScreenSize from "../../utils/getScreenSize";
 import gsap from "gsap";
-
-const app = await setInitialApp("#000");
-
-// const target = document.getElementById("gsap-scroll")!;
+import getRandomSign from "../../utils/getRandomSign";
 
 const mainContainer = document.querySelector("#app");
 
@@ -55,12 +52,9 @@ function createFakeDimensionalArray(
   };
 }
 export default async function scrollTriggerBoxes() {
+  const app = await setInitialApp("#000");
   document.body.style.height = "130vh";
-  /*
-    0 1 2 [0][0-2]
-    3 4 5 [1][0-2]
-    6 7 8 [2][0-2]
-  */
+
   const { screenHeight, screenWidth } = getScreenSize(app);
 
   const { cubes, container } = createFakeDimensionalArray(
@@ -70,34 +64,27 @@ export default async function scrollTriggerBoxes() {
   );
 
   cubes.forEach((cube) => {
-    const x = screenWidth * 0.5;
-    const y = screenHeight * 0.5;
-    const scaleVal = 3;
-    const rotateVal = Math.round(Math.random() * 360 * 2);
-    const hasPerspective = scaleVal > 1.5 || scaleVal < -1.5;
-    // const blurVal = hasPerspective ? ((scaleVal + 2)) : 0;
-    // cube.filters = [blurVal];
+    const x = screenWidth * Math.random() * getRandomSign();
+    const y = screenHeight * Math.random();
+    const scaleVal = Math.random() * 3;
+    const rotateVal = Math.round(Math.random() * 360 * 2) * getRandomSign();
 
-    const tl = gsap.to(cube, {
+    gsap.to(cube, {
       pixi: {
         x,
         y,
         scale: scaleVal,
-        rotation: -rotateVal,
+        rotation: rotateVal,
       },
       scrollTrigger: {
         trigger: mainContainer,
-        start: 0,
-        end: "bottom bottom",
-        scrub: 7.5,
+        start: "top",
+        end: "bottom",
+        scrub: 2,
         toggleActions: "play none reverse none",
         fastScrollEnd: true,
       },
     });
-
-    if (tl.scrollTrigger) {
-      tl.scrollTrigger.refresh();
-    }
   });
 
   app.stage.addChild(container);
